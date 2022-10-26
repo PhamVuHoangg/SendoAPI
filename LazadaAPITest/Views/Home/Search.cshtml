@@ -1,0 +1,106 @@
+﻿@model List<ProductOverView>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p {
+            margin: 0;
+            padding: 5px 0px;
+        }
+
+        .container1 {
+            /*padding: 1% 13%;*/
+           /* background: aliceblue;*/
+        }
+
+        .div-col {
+            background: white;
+            border-radius: 10px;
+            padding: 5px 15px;
+            box-sizing: border-box;
+            flex: 0 0 15%;
+            margin-bottom: 18px;
+        }
+
+        .div-row {
+            /* display: flex;
+                gap: 2%;
+                flex-wrap: wrap; */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px 10px;
+        }
+
+        .name-prodcut {
+            display: flex;
+            align-items: center;
+        }
+
+        .img-shop {
+            width: 33px;
+            height: 12px;
+            padding-right: 10px;
+        }
+
+        .sale-number {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .star-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+            .star-rating::before {
+                color: #ffc600;
+                content: "★";
+                display: block;
+            }
+
+        .installment-item {
+            display: flex;
+            background-color: rgb(241, 243, 249);
+            width: 50%;
+            gap: 5px;
+            border-radius: 5px;
+            padding: 0 10px;
+            color: rgb(19, 48, 150);
+        }
+    </style>
+</head>
+<body>
+    <style></style>
+    <div class="container1">
+        <h2>Ket qua tim kiem cho "@Model.First().SearchText"</h2>
+        <br />
+        <div class="div-row">
+            @if(Model != null && Model.Any())
+            {
+                foreach(var item in Model)
+                {
+                    <div class="div-col" style="">
+                            <img src="@item.Data.Image" alt="" />
+                        <div class="name-prodcut">
+                            <img class="img-shop"
+                            src="@item.Data.Shop_Info.Shop_Logo"
+                            alt="" />
+                            <a asp-controller="Home" asp-route-Id="@item.Data.Id" asp-action="ProductDetail">
+                                <p>@item.Data.Name</p>
+                            </a>
+                        </div>
+                        <p><b>@item.Data.Price.ToString("N0") VND</b></p>
+                        <div class="sale-number">
+                            <div class="star-rating"><b>@item.Data.Rating_Info.Percent_Star/5</b></div>
+                        </div>
+                        <p>@item.Data.Shop_Info.Warehourse_Region_Name</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>

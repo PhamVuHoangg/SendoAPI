@@ -1,0 +1,417 @@
+﻿@model ProductDetail
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+</head>
+
+<style>
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .detail {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(242, 243, 244);
+        padding-bottom: 50px;
+    }
+
+    .container {
+        max-width: 1310px;
+        margin: 0 auto;
+    }
+
+    .detail__container {
+    }
+
+    .detail__top,
+    .detail__bottom {
+        display: grid;
+        column-gap: 10px;
+        grid-template-columns: 0.4fr 0.6fr;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    .detail__top {
+        background-color: #fff;
+        padding-bottom: 40px;
+    }
+
+    .detail__bottom {
+        margin-top: 30px;
+        padding: 0;
+    }
+
+    .detail__left {
+        width: 100%;
+    }
+
+    .detail__left-img {
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+    }
+
+    .detail__right {
+        width: 100%;
+        height: 100%;
+    }
+
+    .detail__right-name {
+        margin: 0;
+        color: #0f1e29;
+        font-size: 22px;
+        line-height: 2.2rem;
+        letter-spacing: .015rem;
+    }
+
+    .detail__right-price {
+        color: #ee2624;
+        font-weight: bold;
+        font-size: 26px;
+        line-height: 3.2rem;
+        letter-spacing: .015rem;
+        margin: 20px 0 0;
+    }
+
+    .detail__right-rate {
+        display: flex;
+        align-items: center;
+    }
+
+    .detail__right-group {
+        border-bottom: 2px solid #e7e8ea;
+    }
+
+    .detail__right-rate-group {
+        display: flex;
+        align-items: center;
+        margin-left: 0.8rem;
+    }
+
+    .detail__right-rate-react {
+        font-size: 18px;
+        line-height: 1.8rem;
+        letter-spacing: 0;
+        color: #0f62fe;
+        margin-left: 0.8rem;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .detail__right-rate-group p {
+        margin-left: 0.4rem;
+        color: #6f787e;
+        font-size: 18px;
+        line-height: 1.8rem;
+        letter-spacing: 0;
+    }
+
+    .onestar::before {
+        content: "★☆☆☆☆";
+        display: block;
+    }
+
+    .twostar::before {
+        content: "★★☆☆☆";
+        display: block;
+    }
+
+    .threestar::before {
+        content: "★★★☆☆";
+        display: block;
+    }
+
+    .fourstar::before {
+        content: "★★★★☆";
+        display: block;
+    }
+
+    .fivestar::before {
+        content: "★★★★★";
+        display: block;
+    }
+
+    .detail__right-rate-start::before {
+        background: linear-gradient(90deg, #ffc600 100%, #e7e8ea 0%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: rgba(0, 0, 0, 0);
+        transform: translateY(-2px);
+    }
+
+    .detail__right-amount {
+        font-size: 16px;
+        line-height: 1.8rem;
+        letter-spacing: 0;
+        color: #ee6c0e;
+    }
+
+    .detail__right-title {
+        font-weight: bold;
+        color: #0f1e29;
+        font-size: 18px;
+        line-height: 2.2rem;
+        letter-spacing: 0;
+    }
+
+    .detail__right-categories--item {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.8rem;
+        color: #0f1e29;
+    }
+
+        .detail__right-categories--item p {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.8rem;
+            color: #0f1e29;
+            background-color: #fafafa;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+    .detail__right-title {
+        margin-bottom: 0;
+    }
+
+    .detail__right-categories {
+        display: grid;
+        column-gap: 10px;
+        grid-template-columns: auto auto;
+    }
+
+        .detail__right-categories p::before {
+            content: "•";
+            margin-right: 6px;
+        }
+
+    .b-16 {
+        padding-bottom: 16px;
+    }
+
+    .detail__bottom-left--top {
+        display: flex;
+        align-items: center;
+        gap: 0 10px;
+    }
+
+    .detail__bottom-left--avatar {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .detail__bottom-left--infor {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .detail__bottom-infor--name {
+        color: #0f1e29;
+        font-size: 18px;
+        line-height: 2.2rem;
+        letter-spacing: 0;
+        font-weight: bold;
+    }
+
+    .detail__bottom-infor--address {
+        font-size: 14px;
+        line-height: 1.6rem;
+        letter-spacing: 0;
+        color: #6f787e;
+    }
+
+    .detail__bottom-left,
+    .detail__bottom-right {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .detail__bottom-left--bottom {
+        display: grid;
+        column-gap: 20px;
+        grid-template-columns: auto auto auto;
+    }
+
+    .detail__bottom-infor--item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .detail__bottom-infor--item p {
+            margin: 5px 0;
+        }
+
+    .detail__bottom-infor--title {
+        color: #0f1e29;
+        font-size: 20px;
+        line-height: 1rem;
+        letter-spacing: 0;
+        font-weight: bold;
+    }
+
+
+    .detail__bottom-infor--desc {
+        color: #3f4b53;
+        font-size: 16px;
+        line-height: 1.6rem;
+        letter-spacing: 0;
+    }
+
+    .detail__bottom-right--title {
+        color: #0f1e29;
+        font-size: 18px;
+        line-height: 2.2rem;
+        letter-spacing: 0;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .detail__bottom-right--desc {
+        color: #3f4b53;
+        font-size: 16px;
+        line-height: 1.2rem;
+        letter-spacing: 0;
+        margin: 5px 0;
+    }
+
+    .d-none {
+        display: none;
+    }
+
+    .detail__bottom-right--content ul li p span,
+    .detail__bottom-right--content p span {
+        font-size: 20px !important;
+        color: #3f4b53;
+        line-height: 1.2rem;
+        letter-spacing: 0;
+    }
+
+</style>
+<body>
+    <div class="detail">
+        <div class="container">
+            <div class="detail__container">
+                <div class="detail__top">
+                    <div class="detail__left">
+                        <img class="detail__left-img" src="@Model.Image" alt="product img">
+                    </div>
+                    <div class="detail__right">
+                        <div class="detail__right-top">
+                            <h4 class="detail__right-name">
+                                @Model.Name
+                            </h4>
+                            <p class="detail__right-price">@Model.Price.ToString("N0") VND</p>
+                            <div class="detail__right-group b-16">
+                                <div class="detail__right-rate">
+                                    <div class="detail__right-rate-start onestar"></div>
+                                    <p class="detail__right-rate-react">@Model.Rating_Info.Star1 đánh giá</p>
+                                </div>
+                                <div class="detail__right-rate">
+                                    <div class="detail__right-rate-start twostar"></div>
+                                    <p class="detail__right-rate-react">@Model.Rating_Info.Star2 đánh giá</p>
+                                </div>
+                                <div class="detail__right-rate">
+                                    <div class="detail__right-rate-start threestar"></div>
+                                    <p class="detail__right-rate-react">@Model.Rating_Info.Star3 đánh giá</p>
+                                </div>
+                                <div class="detail__right-rate">
+                                    <div class="detail__right-rate-start fourstar"></div>
+                                    <p class="detail__right-rate-react">@Model.Rating_Info.Star4 đánh giá</p>
+                                </div>
+                                <div class="detail__right-rate">
+                                    <div class="detail__right-rate-start fivestar"></div>
+                                    <p class="detail__right-rate-react">@Model.Rating_Info.Star5 đánh giá</p>
+                                </div>
+                            </div>
+                            <div class="detail__right-group">
+                                <p class="detail__right-amount">
+                                    Còn @Model.Quantity sản phẩm
+                                </p>
+                            </div>
+                            <div class="detail__right-group">
+                                <p class="detail__right-title">
+                                    Danh mục
+                                </p>
+                                <div class="detail__right-categories">
+                                    @if(Model.Category_Info.Any())
+                                    {
+                                        foreach(var item in Model.Category_Info)
+                                        {
+                                            <p class="detail__right-categories--item">
+                                                @item.Title
+                                            </p>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail__bottom">
+                    <div class="detail__bottom-left">
+                        <div class="detail__bottom-left--top">
+                            <img class="detail__bottom-left--avatar" src="@Model.Shop_Info.Shop_Logo" alt="avatar">
+                            <div class="detail__bottom-left--infor">
+                                <span class="detail__bottom-infor--name">@Model.Shop_Info.Shop_Name</span>
+                                <div>
+                                    <span class="detail__bottom-infor--address">@Model.Shop_Info.Warehourse_Region_Name</span> | <span class="detail__bottom-infor--address">@Model.Shop_Info.Phone_Number</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail__bottom-left--bottom">
+                            <div class="detail__bottom-infor--item">
+                                <p class="detail__bottom-infor--title">@Model.Shop_Info.Product_Total</p>
+                                <p class="detail__bottom-infor--desc">Sản phẩm</p>
+                            </div>
+                            <div class="detail__bottom-infor--item">
+                                <p class="detail__bottom-infor--title">@Model.Shop_Info.Rating_Count</p>
+                                <p class="detail__bottom-infor--desc">Lượt đánh giá</p>
+                            </div>
+                            <div class="detail__bottom-infor--item">
+                                <p class="detail__bottom-infor--title detail__bottom-infor--star">@Model.Shop_Info.Rating_Avg/5</p>
+                                <p class="detail__bottom-infor--desc">Điểm đánh giá</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail__bottom-right">
+                        <p class="detail__bottom-right--title">Mô tả sản phẩm</p>
+                        <div class="content-none d-none">
+                        </div>
+                        <div class="detail__bottom-right--content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let string = '@Model.Description_Info.Description'
+    let contentString = document.querySelector('.content-none');
+    console.log(contentString.textContent)
+    let content = document.querySelector(".detail__bottom-right--content");
+    // content.innerHTML = contentString.textContent;
+    content.innerHTML = string;
+</script>
+</html>
